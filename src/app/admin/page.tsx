@@ -97,9 +97,17 @@ export default function AdminPage() {
             </button>
           </div>
           {crawlLog && (
-            <pre className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700 overflow-x-auto max-h-32">
-              {crawlLog}
-            </pre>
+            <div className="relative">
+              <pre className="bg-gray-50 rounded-lg p-3 text-xs text-gray-700 overflow-x-auto max-h-32">
+                {crawlLog}
+              </pre>
+              <button
+                onClick={() => navigator.clipboard.writeText(crawlLog)}
+                className="absolute top-2 right-2 text-xs px-2 py-1 bg-white border border-gray-200 rounded hover:bg-gray-100 text-gray-500 transition-colors"
+              >
+                복사
+              </button>
+            </div>
           )}
         </div>
 
@@ -111,13 +119,13 @@ export default function AdminPage() {
               value={newCompany}
               onChange={e => setNewCompany(e.target.value)}
               placeholder="기업명"
-              className="w-32 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+              className="w-32 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 bg-white"
             />
             <input
               value={newUrl}
               onChange={e => setNewUrl(e.target.value)}
               placeholder="채용페이지 URL"
-              className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-400 bg-white"
             />
             <button
               onClick={addTarget}
@@ -146,7 +154,14 @@ export default function AdminPage() {
               </button>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-800">{t.company}</p>
-                <p className="text-xs text-gray-400 truncate">{t.url}</p>
+                <a
+                  href={t.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-400 hover:text-blue-600 hover:underline truncate"
+                >
+                  {t.url}
+                </a>
               </div>
               <button
                 onClick={() => deleteTarget(t.id)}

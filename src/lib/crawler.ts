@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { anthropic, CRAWL_MODEL } from './anthropic';
-import { supabaseAdmin } from './supabase';
+import { supabaseAdmin } from './supabase-admin';
 import { JobPosting } from '@/types';
 
 export async function crawlWithAI(url: string, company: string): Promise<Partial<JobPosting>[]> {

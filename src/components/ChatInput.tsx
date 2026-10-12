@@ -67,7 +67,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           disabled={disabled}
           placeholder="채용공고 검색 또는 면접 준비 질문을 입력하세요... (Shift+Enter: 줄바꿈)"
           rows={1}
-          className="flex-1 resize-none rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-blue-400 disabled:opacity-50 placeholder:text-gray-400"
+          className="flex-1 resize-none rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 bg-white focus:outline-none focus:border-blue-400 disabled:opacity-50 placeholder:text-gray-400"
         />
         <button
           onClick={handleSend}
