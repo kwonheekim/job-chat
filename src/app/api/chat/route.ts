@@ -122,6 +122,30 @@ async function handleToolCall(name: string, input: Record<string, unknown>) {
     return { error: 'Unknown stats type' };
   }
 
+  if (name === 'search_web') {
+    const { query } = input as { query: string };
+    const res = await fetch('https://api.tavily.com/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        api_key: process.env.TAVILY_API_KEY,
+        query,
+        search_depth: 'basic',
+        include_answer: true,
+        max_results: 5,
+      }),
+    });
+    const data = await res.json();
+    return {
+      answer: data.answer ?? '',
+      results: (data.results ?? []).map((r: { title: string; url: string; content: string }) => ({
+        title: r.title,
+        url: r.url,
+        content: r.content,
+      })),
+    };
+  }
+
   return { error: 'Unknown tool' };
 }
 
